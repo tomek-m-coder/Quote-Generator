@@ -6,6 +6,17 @@ const newQuoteBtn = document.getElementById('new-quote');
 
 let apiQuotes = [];
 
+// Show Loading
+function loading(){
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+
+// Hide Loading
+function loadingComplete(){
+    quoteContainer.hidden = false;
+    loader.hidden = true;
+}
 
 // Show New Quote
 function newQuote() {
@@ -53,3 +64,4 @@ twitterBtn.addEventListener('click', tweetQuote);
 // On load
 getQuotes(); // Fetch quotes from the API and display one
 // newQuote(); // Use this if you want to show a quote from localQuotes immediately
+
