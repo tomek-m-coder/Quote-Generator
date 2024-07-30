@@ -16,7 +16,17 @@ function newQuote() {
     } else {
         quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
     }
-    authorText.textContent = quote.author;
+    if (!quote.author){
+        authorText.textContent = 'Unknown';
+    }else{
+        authorText.textContent = quote.author;
+    }
+    // Check the code lenght to determine styling
+    if(quote.text.lenght > 120){
+        quoteText.classList.add('long-quote')
+    }else{
+        quoteText.classList.remove('long-quote')
+    }
     quoteText.textContent = quote.text;
 }
 
@@ -31,10 +41,15 @@ async function getQuotes() {
         console.error('Error fetching the quotes: ', error);
     }
 }
+//Tweet Quote
+function tweetQuote() {
+const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+window.open(twitterUrl, '_blank');
+}
 
 // Event Listeners
 newQuoteBtn.addEventListener('click', newQuote);
-
+twitterBtn.addEventListener('click', tweetQuote);
 // On load
 getQuotes(); // Fetch quotes from the API and display one
 // newQuote(); // Use this if you want to show a quote from localQuotes immediately
